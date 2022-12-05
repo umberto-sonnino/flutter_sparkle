@@ -20,7 +20,7 @@ public class FlutterSparklePlugin: NSObject, FlutterPlugin {
         let url = args as? String
         let controller = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
         controller.updater.checkForUpdates()
-        result("Updating URL: \(controller.updater.feedURL?.absoluteString ?? "no_url")")
+        result("Updating URL: \(controller.updater.feedURL?.absoluteString ?? "no_url"), passed \(url ?? "nothing")")
     default:
       result(FlutterMethodNotImplemented)
     }
