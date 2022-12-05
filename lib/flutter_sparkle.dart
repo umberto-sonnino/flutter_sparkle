@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -10,20 +9,29 @@ class FlutterSparkle {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
-  static void checkMacUpdate (String feedUrl){
-    _channel.invokeMethod('checkMacUpdate',feedUrl);
+
+  static Future<String?> checkMacUpdate(String feedUrl) async {
+    // TODO: do we need a String result? Maybe revert this.
+    final String? res = await _channel.invokeMethod('checkMacUpdate', feedUrl);
+    return res;
   }
-  static void checkWinUpdate(){
+
+  static void checkWinUpdate() {
     _channel.invokeMethod('checkWinUpdate');
   }
-  static void checkWinUpdateAndInstall(){
+
+  static void checkWinUpdateAndInstall() {
     _channel.invokeMethod('checkWinUpdateAndInstall');
   }
-  static void checkWinUpdateWithoutUI(){
+
+  static void checkWinUpdateWithoutUI() {
     _channel.invokeMethod('checkWinUpdateWithoutUI');
   }
+
   static Future<String?> initWinUpdate(String feedUrl) async {
-    final String? url = await _channel.invokeMethod('initWinSparkle',{'feedUrl':feedUrl});
+    // TODO: is this using the URL from the feed too? Need to test on Windows...
+    final String? url =
+        await _channel.invokeMethod('initWinSparkle', {'feedUrl': feedUrl});
     return url;
   }
 }
